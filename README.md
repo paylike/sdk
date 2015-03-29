@@ -48,6 +48,7 @@ Both methods take a `config` like the following:
 	amount: Number,		// minor units (e.g. "200" is $ 2)
 
 	// data to pass along (objects, nested objects, arrays and primitives)
+	// this will be visible in your dashboard
 	// the limits are: keys < 100, depth < 10, key length < 100
 	custom: Object,
 }
