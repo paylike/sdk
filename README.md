@@ -125,3 +125,7 @@ When attached the SDK will:
 - format the expiry date when typing
 - dispatch the required requests upon submit
 - run the callback on success
+
+All input fields inside the same `form` block with a `name` attribute (even
+`type="hidden"`) will be added to the custom object (indexed by the name) and
+be viewable in your dashboard.
