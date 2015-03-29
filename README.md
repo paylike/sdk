@@ -54,7 +54,7 @@ Both methods take a `config` like the following:
 }
 ```
 
-## Popup
+### Popup
 
 ```js
 var paylike = Paylike('your key');
@@ -66,7 +66,7 @@ This will open up a payment window and charge the user 10,00 kr. Once it is
 completed, the callback will be fired. If the user closes the window, the
 callback is called with the error "closed".
 
-### Custom fields
+#### Custom fields
 
 The config object supports an additional key "fields".
 
@@ -93,7 +93,7 @@ paylike.popup({
 You can even add a field with the class "amount", and it will allow users to
 set the amount. A field with the class "currency" works the same way.
 
-## Form (a custom embedded form)
+### Form (a custom embedded form)
 
 This is the method if you want to design your own payment form.
 
