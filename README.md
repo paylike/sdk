@@ -111,9 +111,16 @@ paylike.form(selector, config, cb);
 
 `selector` is the css selector of you form element.
 
+Your form is required to have input fields with the classes:
+
+- `card-number`
+- `card-expiry` (or `card-expiry-month` and `card-expiry-year`)
+- `card-code`
+
+as well as an element with the class `error` for feedback.
+
 When attached the SDK will:
 
-- put any error message into an element with the class `error` inside the form
 - format the card number when typing
 - format the expiry date when typing
 - dispatch the required requests upon submit
