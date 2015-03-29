@@ -4,6 +4,9 @@ https://sdk.paylike.io/1.js
 
 Less than 7 KB (20 KB uncompressed).
 
+Given your public key (found in the dashboard) the job of this SDK is to
+create a transaction from your customers card details.
+
 ## Example
 
 ```html
