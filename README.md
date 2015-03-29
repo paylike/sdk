@@ -1,6 +1,6 @@
 # Paylike SDK
 
-`https://sdk.paylike.io/1.js`
+https://sdk.paylike.io/1.js
 
 Less than 7 KB (20 KB uncompressed).
 
