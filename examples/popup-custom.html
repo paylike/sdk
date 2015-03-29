@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+
+	<title>Paylike.io SDK examples</title>
+</head>
+<body>
+	<script src="//sdk.paylike.io/1.js"></script>
+	<script>
+		Paylike('e9f468a8-4b63-46a5-aaf3-0911312bae27').popup({
+			currency: 'DKK',
+			amount: 19995,
+			custom: {
+				product: 'b12fa-d7',
+			},
+			fields: [
+				// simple custom field
+				'name',
+
+				// elaborate custom field
+				{
+					name: 'email',
+					type: 'email',
+					class: 'email',
+					placeholder: 'user@example.com',
+					required: true,
+				},
+			],
+		}, function( err, res ){
+			if (err)
+				return console.log(err);
+
+			console.log(res.transaction.id);
+
+			// location.href = '/thank-you';
+			alert('Thank you!');
+		});
+	</script>
+</body>
+</html>

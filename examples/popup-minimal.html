@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Paylike.io SDK examples</title>
+</head>
+<body>
+	<script src="//sdk.paylike.io/1.js"></script>
+	<script>
+		Paylike('e9f468a8-4b63-46a5-aaf3-0911312bae27').popup({
+			currency: 'DKK',
+			amount: 19995,
+		}, function( err, res ){
+			if (err)
+				console.log(err);
+
+			console.log(res.transaction.id);
+
+			// location.href = '/thank-you';
+			alert('Thank you!');
+		});
+	</script>
+</body>
+</html>

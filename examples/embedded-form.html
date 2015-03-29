@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+
+	<title>Paylike.io SDK examples</title>
+</head>
+<body class="example">
+	<form class="paylike" action="#" method="POST">
+		<p class="error"></p>
+
+		<!-- CUSTOM DATA -->
+		<input type="hidden" name="reference" value="example-2" />
+		<div>
+			<input type="email" id="email" name="email" placeholder="john@example.com" required />
+			<label for="email">E-mail</label>
+		</div>
+		<div>
+			<input type="text" id="name" name="name" placeholder="John Doe" pattern="\w+ \w+.*" required />
+			<label for="name">Name</label>
+		</div>
+
+		<!-- SETTING AMOUNT AND CURRENCY FROM HTML -->
+		<input type="hidden" class="amount" value="495,50" />
+		<input type="hidden" class="currency" value="DKK" />
+
+		<div class="card-number-container">
+			<input type="text" id="card-number" class="card-number" placeholder="0000  0000  0000  0000" pattern="[0-9]{4}  [0-9]{4}  [0-9]{4}  .*" required />
+			<label for="card-number">Card number</label>
+			<div class="visa"></div>
+			<div class="mastercard"></div>
+		</div>
+		<div class="expiry">
+			<input type="text" id="card-expiry" class="card-expiry" placeholder="MM  /  YY" pattern="[0-9]{2}  /  ([0-9]{2}|[0-9]{4})" required />
+			<label for="card-expiry">Expiry date</label>
+		</div>
+		<div class="code">
+			<input type="text" id="card-code" class="card-code" placeholder="***" maxlength="4" pattern="[0-9]{3,4}" required />
+			<label for="card-code">CVC</label>
+		</div>
+		<div class="submit">
+			<button>
+				<div>
+					<span class="description">Total to pay</span>
+					<span class="amount">DKK 495,50</span>
+					<span class="action">Complete payment</span>
+				</div>
+			</button>
+		</div>
+	</form>
+
+	<script src="//sdk.paylike.io/1.js"></script>
+	<script>
+		Paylike('e9f468a8-4b63-46a5-aaf3-0911312bae27').form(
+			// CSS selector or DOM node of target form
+			'form.paylike',
+
+			// optional configuration hash, will override any HTML data
+			{
+				currency: 'DKK'
+			},
+			function( err, res ){
+				if (err)
+					return console.error(err);
+
+				console.log(res.transaction.id);
+
+				// location.href = '/thank-you';
+				alert('Thank you!');
+			}
+		);
+	</script>
+</body>
+</html>
