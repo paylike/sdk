@@ -7,6 +7,9 @@ Less than 7 KB (20 KB uncompressed).
 Given your public key (found in the dashboard) the job of this SDK is to
 create a transaction from your customers card details.
 
+Use the issue tracker here to file any bug reports or feature requests, we are
+happy to grow with your needs.
+
 ## Example
 
 ```html
@@ -146,3 +149,6 @@ The current SDK has been tested successfully with:
 
 It probably works just fine on much older versions of Chrome, Firefox and
 Opera even though we have not tested that.
+
+If you have issues with an environment or need specific support for a browser,
+please just open an issue and we will have a look.
