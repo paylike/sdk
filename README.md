@@ -141,5 +141,5 @@ The current SDK has been tested successfully with:
 - Chrome 31+
 - Chrome for Android 41+
 - Opera 27+
-- Safari 7.1+ (incl. iPhone 4S with iOS 6)
+- Safari 6.1+ (incl. iPhone 4S with iOS 6)
 - IE 10+ (incl. Windows Phone)
