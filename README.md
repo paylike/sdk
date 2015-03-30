@@ -143,3 +143,6 @@ The current SDK has been tested successfully with:
 - Opera 27+
 - Safari 6.1+ (incl. iPhone 4S with iOS 6)
 - IE 10+ (incl. Windows Phone)
+
+It probably works just fine on much older versions of Chrome, Firefox and
+Opera even though we have not tested that.
