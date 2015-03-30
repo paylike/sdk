@@ -129,3 +129,17 @@ When attached the SDK will:
 All input fields inside the same `form` block with a `name` attribute (even
 `type="hidden"`) will be added to the custom object (indexed by the name) and
 be viewable in your dashboard.
+
+## Browser support
+
+The SDK uses XMLHttpRequest and CORS (no iframes from the dark side of the
+00's) and supports all modern browsers.
+
+The current SDK has been tested successfully with:
+
+- Firefox 35+
+- Chrome 31+
+- Chrome for Android 41+
+- Opera 27+
+- Safari 7.1+ (incl. iPhone 4S with iOS 6)
+- IE 10+ (incl. Windows Phone)
