@@ -1,5 +1,7 @@
 # Paylike SDK
 
+[![Join the chat at https://gitter.im/paylike/sdk](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/paylike/sdk?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 https://sdk.paylike.io/1.js
 
 Less than 7 KB (20 KB uncompressed).
