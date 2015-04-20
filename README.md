@@ -22,7 +22,7 @@ happy to grow with your needs.
 		amount: 1000,
 	}, function( err, res ){
 		if (err)
-			console.log(err);
+			return console.log(err);
 
 		console.log(res.transaction.id);
 
