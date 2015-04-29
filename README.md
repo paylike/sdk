@@ -17,7 +17,9 @@ happy to grow with your needs.
 ```html
 <script src="//sdk.paylike.io/1.js"></script>
 <script>
-	Paylike('your key').popup({
+	var paylike = Paylike('your key');
+
+	paylike.popup({
 		currency: 'DKK',
 		amount: 1000,
 	}, function( err, res ){
@@ -35,7 +37,7 @@ Check out all examples in the examples folder.
 
 ## API
 
-All methods take a `callback` which they call in the style: `callback(error,
+All methods accept a `callback` which they call in the style: `callback(error,
 response)`.
 
 The response will look like this:
@@ -48,7 +50,7 @@ The response will look like this:
 }
 ```
 
-Both methods take a `config` like the following:
+All methods accept a `config` like the following:
 
 ```js
 {
@@ -76,7 +78,8 @@ callback is called with the error "closed".
 
 #### Custom fields
 
-The config object supports an additional key "fields".
+With the popup method the config object supports an additional key called
+`fields`.
 
 ```js
 paylike.popup({
@@ -114,12 +117,13 @@ var paylike = Paylike('your key');
 paylike.form(selector, config, cb);
 ```
 
-`selector` is the css selector of you form element.
+`selector` is the css selector of your form element, it will accept a DOM node
+as well.
 
 Your form is required to have input fields with the classes:
 
 - `card-number`
-- `card-expiry` (or `card-expiry-month` and `card-expiry-year`)
+- `card-expiry` (alternatively `card-expiry-month` and `card-expiry-year`)
 - `card-code`
 
 as well as an element with the class `error` for feedback.
@@ -137,8 +141,8 @@ be viewable in your dashboard.
 
 ## Browser support
 
-The SDK uses XMLHttpRequest and CORS (no iframes from the dark side of the
-00's) and supports all modern browsers.
+The SDK uses XMLHttpRequest and CORS which is supported by all modern
+browsers.
 
 The current SDK has been tested successfully with:
 

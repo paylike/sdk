@@ -7,7 +7,9 @@
 <body>
 	<script src="//sdk.paylike.io/1.js"></script>
 	<script>
-		Paylike('e9f468a8-4b63-46a5-aaf3-0911312bae27').popup({
+		var paylike = Paylike('e9f468a8-4b63-46a5-aaf3-0911312bae27');
+
+		paylike.popup({
 			currency: 'DKK',
 			custom: {
 				perk: 'sticker',
