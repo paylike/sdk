@@ -9,22 +9,25 @@
 	<title>Paylike.io SDK examples</title>
 </head>
 <body>
-	<script src="//sdk.paylike.io/1.js"></script>
+	<button>Pay</button>
+
+	<script src="https://sdk.paylike.io/1.js"></script>
 	<script>
 		var paylike = Paylike('e9f468a8-4b63-46a5-aaf3-0911312bae27');
 
-		paylike.popup({
-			currency: 'DKK',
-			amount: 19995,
-		}, function( err, res ){
-			if (err)
-				return console.log(err);
+		document.querySelector('button').addEventListener('click', pay);
 
-			console.log(res.transaction.id);
+		function pay(){
+			paylike.popup({
+				currency: 'DKK',
+				amount: 19995,
+			}, function( err, r ){
+				if (err)
+					return console.warn(err);
 
-			// location.href = '/thank-you';
-			alert('Thank you!');
-		});
+				console.log(r);	// { transaction: { id: ... } }
+			});
+		}
 	</script>
 </body>
 </html>

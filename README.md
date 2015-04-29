@@ -104,7 +104,7 @@ paylike.popup({
 You can even add a field with the class "amount", and it will allow users to
 set the amount. A field with the class "currency" works the same way.
 
-### Form (a custom embedded form)
+### Pay (embedded form)
 
 This is the method if you want to design your own payment form.
 
@@ -114,7 +114,7 @@ ensure they are never sent to your server**
 ```js
 var paylike = Paylike('your key');
 
-paylike.form(selector, config, cb);
+paylike.pay(selector, config, cb);
 ```
 
 `selector` is the css selector of your form element, it will accept a DOM node
@@ -126,18 +126,33 @@ Your form is required to have input fields with the classes:
 - `card-expiry` (alternatively `card-expiry-month` and `card-expiry-year`)
 - `card-code`
 
-as well as an element with the class `error` for feedback.
+You probably want to call `paylike.pay` when the submit event fires on the
+form. Make sure to do error checking and show some sort of loading state while
+we are processing the payment.
 
-When attached the SDK will:
+See [this example of a minimal form](examples/embedded-minimal.html) and [this
+of a more elaborate use](examples/embedded-complete.html).
 
-- format the card number when typing
-- format the expiry date when typing
-- dispatch the required requests upon submit
-- run the callback on success
+#### Utilities
 
-All input fields inside the same `form` block with a `name` attribute (even
-`type="hidden"`) will be added to the custom object (indexed by the name) and
-be viewable in your dashboard.
+To speed up your development we expose some of the utility functions we make
+use of ourself.
+
+```js
+Paylike.assistNumber(domNode)
+```
+
+- prevent anything else than digits
+- add a `visa` or `mastercard` class as soon as possible
+- split the number after each run of four digits
+
+```js
+Paylike.assistExpiry(domNode)
+```
+
+- prevent anything else than digits
+- enforce a valid (1-12) month and year (two or four digits)
+- assist by inserting "  /  " between month and year
 
 ## Browser support
 

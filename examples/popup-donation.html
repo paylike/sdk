@@ -5,35 +5,46 @@
 	<title>Paylike.io SDK examples</title>
 </head>
 <body>
-	<script src="//sdk.paylike.io/1.js"></script>
+	<button>Donate</button>
+
+	<script src="https://sdk.paylike.io/1.js"></script>
 	<script>
 		var paylike = Paylike('e9f468a8-4b63-46a5-aaf3-0911312bae27');
 
-		paylike.popup({
-			currency: 'DKK',
-			custom: {
-				perk: 'sticker',
-			},
-			fields: [
-				{
-					name: 'name',
-					placeholder: 'John Doe',
-				},
-				{
-					name: 'amount',
-					value: '100.00',
-					required: true,
-				},
-			],
-		}, function( err, res ){
-			if (err)
-				return console.log(err);
+		document.querySelector('button').addEventListener('click', donate);
 
-			console.log(res.transaction.id);
+		function donate(){
+			paylike.popup({
+				currency: 'DKK',
+				custom: {
+					perk: 'sticker',
+				},
+				fields: [
+					{
+						name: 'name',
+						placeholder: 'John Doe',
+					},
+					{
+						name: 'amount',
+						value: '100.00',
+						required: true,
+					},
+				],
+			}, function( err, r ){
+				if (err)
+					return console.log(err);
 
-			// location.href = '/thank-you';
-			alert('Thank you!');
-		});
+				console.log(r);
+
+				alert('Thank you!');
+
+				/*
+				You could also redirect the user:
+
+				location.href = '/thank-you';
+				*/
+			});
+		}
 	</script>
 </body>
 </html>
