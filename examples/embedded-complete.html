@@ -69,7 +69,7 @@
 			}, function( err, r ){
 				if (err) {
 					$submit.disabled = false;
-					$error.textContent = err;
+					$error.textContent = err.message || err;
 					return;
 				}
 
