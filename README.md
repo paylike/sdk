@@ -9,6 +9,8 @@ Less than 7 KB (20 KB uncompressed).
 Given your public key (found in the dashboard) the job of this SDK is to
 create a transaction from your customers card details.
 
+[Sign up for a free merchant account (testing and live, instantly)](https://paylike.io)
+
 Use the issue tracker here to file any bug reports or feature requests, we are
 happy to grow with your needs.
 
