@@ -5,13 +5,29 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<link rel="stylesheet" href="./styles.css">
 
 	<title>Paylike.io SDK examples</title>
 </head>
 <body>
-	<button>Pay</button>
+	<p>
+		This example is the absolute minimal implementation of payment the
+		popup.
+	</p>
+	<p>
+		For test purposes use the card number <code>4100 0000 0000 0000</code>
+		with any expiry date and CVC. Use <code>4200 0000 0000 0000</code> as
+		an invalid card number.
+	</p>
+	<button>Try it (pay)</button>
+	<ul>
+		<li><a href="popup-custom.html">Elaborate popup example</a></li>
+		<li><a href="popup-donation.html">Donations popup example</a></li>
+	</ul>
 
-	<script src="https://sdk.paylike.io/1.js"></script>
+	<a href="https://github.com/paylike/sdk">SDK documentation on GitHub</a>
+
+	<script src="https://sdk.paylike.io/2.js"></script>
 	<script>
 		var paylike = Paylike('e9f468a8-4b63-46a5-aaf3-0911312bae27');
 
@@ -19,8 +35,8 @@
 
 		function pay(){
 			paylike.popup({
-				currency: 'DKK',
-				amount: 19995,
+				currency: 'USD',
+				amount: 2000,
 			}, function( err, r ){
 				if (err)
 					return console.warn(err);

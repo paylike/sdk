@@ -2,12 +2,31 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<link rel="stylesheet" href="./styles.css">
+
 	<title>Paylike.io SDK examples</title>
 </head>
 <body>
-	<button>Donate</button>
+	<p>
+		This is an example of a simple donation style popup.
+	</p>
+	<p>
+		For test purposes use the card number <code>4100 0000 0000 0000</code>
+		with any expiry date and CVC. Use <code>4200 0000 0000 0000</code> as
+		an invalid card number.
+	</p>
+	<button>Try it (donate)</button>
+	<ul>
+		<li><a href="popup-minimal.html">Minimal popup example</a></li>
+		<li><a href="popup-custom.html">Elaborate popup example</a></li>
+	</ul>
 
-	<script src="https://sdk.paylike.io/1.js"></script>
+	<a href="https://github.com/paylike/sdk">SDK documentation on GitHub</a>
+
+	<script src="https://sdk.paylike.io/2.js"></script>
 	<script>
 		var paylike = Paylike('e9f468a8-4b63-46a5-aaf3-0911312bae27');
 
@@ -15,10 +34,9 @@
 
 		function donate(){
 			paylike.popup({
-				currency: 'DKK',
-				custom: {
-					perk: 'sticker',
-				},
+				title: 'Save John\'s coffee shop',
+				description: 'Thank you for your kindness. By donating you help us keep the shop open to everyone.',
+				currency: 'USD',
 				fields: [
 					{
 						name: 'name',
@@ -26,7 +44,7 @@
 					},
 					{
 						name: 'amount',
-						value: '100.00',
+						value: '10.00',
 						required: true,
 					},
 				],
@@ -35,8 +53,6 @@
 					return console.log(err);
 
 				console.log(r);
-
-				alert('Thank you!');
 
 				/*
 				You could also redirect the user:
