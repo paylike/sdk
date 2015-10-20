@@ -66,8 +66,8 @@ paylike.popup(config, callback);
 }
 ```
 
-Most configuration options are optional. Only an amount and a is required
-currency.
+Most configuration options are optional. Only an amount and a currency are
+required.
 
 See this example of using `custom` and `fields`:
 https://sdk.paylike.io/examples/popup-custom.html
