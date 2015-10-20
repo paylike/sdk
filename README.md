@@ -2,10 +2,6 @@
 
 [![Join the chat at https://gitter.im/paylike/sdk](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/paylike/sdk?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-https://sdk.paylike.io/1.js
-
-Less than 7 KB (20 KB uncompressed).
-
 Given your public key (found in the dashboard) the job of this SDK is to
 create a transaction from your customers card details.
 
@@ -14,10 +10,16 @@ create a transaction from your customers card details.
 Use the issue tracker here to file any bug reports or feature requests, we are
 happy to grow with your needs.
 
-## Example
+## Examples
+
+- https://sdk.paylike.io/examples/popup-minimal.html
+- https://sdk.paylike.io/examples/popup-custom.html
+- https://sdk.paylike.io/examples/popup-donation.html
+
+You can find the source code of all above examples in this repository.
 
 ```html
-<script src="//sdk.paylike.io/1.js"></script>
+<script src="//sdk.paylike.io/2.js"></script>
 <script>
 	var paylike = Paylike('your key');
 
@@ -35,12 +37,42 @@ happy to grow with your needs.
 </script>
 ```
 
-Check out all examples in the examples folder.
+## Popup
 
-## API
+```js
+var paylike = Paylike('your key');
+paylike.popup(config, callback);
+```
 
-All methods accept a `callback` which they call in the style: `callback(error,
-response)`.
+```js
+{
+	locale: String,			// pin the popup to a locale (e.g. en_US or en)
+
+	currency: String,		// ISO 4217 (e.g. "USD")
+	amount: Number,			// minor units (e.g. "200" is $ 2)
+
+	title: String,			// title text to show in popup
+	description: String,	// descriptive text to show in popup
+
+	descriptor: String,		// text on customers bank statement
+
+	// data to pass along (objects, nested objects, arrays and primitives)
+	// this will be visible in your dashboard
+	// the limits are: keys < 100, depth < 10, key length < 100
+	custom: Object,
+
+	// additional fields to display in popup
+	fields: Array,
+}
+```
+
+Most configuration options are optional. Only an amount and a is required
+currency.
+
+See this example of using `custom` and `fields`:
+https://sdk.paylike.io/examples/popup-custom.html
+
+The callback is called in "node-style": `callback(error, response)`.
 
 The response will look like this:
 
@@ -49,39 +81,22 @@ The response will look like this:
 	transaction: {
 		id: String,
 	},
+	custom: { ... },
 }
 ```
 
-All methods accept a `config` like the following:
+If the user closes the popup the `error` variable will have a value of
+`closed`.
 
-```js
-{
-	currency: String,	// ISO 4217 (e.g. "USD")
-	amount: Number,		// minor units (e.g. "200" is $ 2)
+### Currencies
 
-	// data to pass along (objects, nested objects, arrays and primitives)
-	// this will be visible in your dashboard
-	// the limits are: keys < 100, depth < 10, key length < 100
-	custom: Object,
-}
-```
+All supported currencies are listed at https://github.com/paylike/currencies
 
-### Popup
+### Descriptor
 
-```js
-var paylike = Paylike('your key');
-
-paylike.popup(config, cb);
-```
-
-This will open up a payment window and charge the user 10,00 kr. Once it is
-completed, the callback will be fired. If the user closes the window, the
-callback is called with the error "closed".
+See https://github.com/paylike/descriptor for format and restrictions.
 
 #### Custom fields
-
-With the popup method the config object supports an additional key called
-`fields`.
 
 ```js
 paylike.popup({
@@ -95,7 +110,6 @@ paylike.popup({
 		{
 			name: 'email',
 			type: 'email',
-			class: 'email',
 			placeholder: 'user@example.com',
 			required: true,
 		},
@@ -104,9 +118,9 @@ paylike.popup({
 ```
 
 You can even add a field with the class "amount", and it will allow users to
-set the amount. A field with the class "currency" works the same way.
+set the amount.
 
-### Pay (embedded form)
+## Embedded form
 
 This is the method if you want to design your own payment form.
 
@@ -138,7 +152,7 @@ of a more elaborate use](examples/embedded-complete.html).
 #### Utilities
 
 To speed up your development we expose some of the utility functions we make
-use of ourself.
+use of ourselves.
 
 ```js
 Paylike.assistNumber(domNode)
