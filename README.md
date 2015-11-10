@@ -1,14 +1,19 @@
 # Paylike SDK
 
-[![Join the chat at https://gitter.im/paylike/sdk](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/paylike/sdk?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Create transactions from customer's card details on the web with this SDK and
+your public key (found in our dashboard).
 
-Given your public key (found in the dashboard) the job of this SDK is to
-create a transaction from your customers card details.
-
-[Sign up for a free merchant account (testing and live, instantly)](https://paylike.io)
+[Sign up for a free merchant account (instant)](https://paylike.io)
 
 Use the issue tracker here to file any bug reports or feature requests, we are
 happy to grow with your needs.
+
+When implementing and testing, make sure to use a key from a test account,
+which will also allow you to test without https (e.g. locally).
+
+Need help? Chat with us on Gitter or send an email: hello@paylike.io.
+
+[https://badges.gitter.im/Join%20Chat.svg](https://gitter.im/paylike/sdk)
 
 ## Examples
 
