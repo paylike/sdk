@@ -13,7 +13,7 @@ which will also allow you to test without https (e.g. locally).
 
 Need help? Chat with us on Gitter or send an email: hello@paylike.io.
 
-[https://badges.gitter.im/Join%20Chat.svg](https://gitter.im/paylike/sdk)
+[![Join the chat at https://gitter.im/paylike/sdk](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/paylike/sdk?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Examples
 
