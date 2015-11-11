@@ -59,7 +59,7 @@ paylike.popup(config, callback);
 	title: String,			// title text to show in popup
 	description: String,	// descriptive text to show in popup
 
-	descriptor: String,		// text on customers bank statement
+	descriptor: String,		// text on customer bank statement (SEE RESTRICTIONS BELOW)
 
 	// data to pass along (objects, nested objects, arrays and primitives)
 	// this will be visible in your dashboard
@@ -98,6 +98,9 @@ If the user closes the popup the `error` variable will have a value of
 All supported currencies are listed at https://github.com/paylike/currencies
 
 ### Descriptor
+
+Passing a descriptor you need to be absolutely sure to follow the format to
+avoid losing transactions due to rejection by the popup.
 
 See https://github.com/paylike/descriptor for format and restrictions.
 
