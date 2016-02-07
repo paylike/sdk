@@ -3,7 +3,7 @@
 Create transactions from customer's card details on the web with this SDK and
 your public key (found in our dashboard).
 
-[Sign up for a free merchant account (instant)](https://paylike.io)
+[Sign up for a free merchant account (free and instant)](https://paylike.io)
 
 Use the issue tracker here to file any bug reports or feature requests, we are
 happy to grow with your needs.
