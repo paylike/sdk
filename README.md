@@ -20,8 +20,7 @@ Need help? Chat with us on Gitter or send an email: hello@paylike.io.
 - https://sdk.paylike.io/examples/popup-minimal.html
 - https://sdk.paylike.io/examples/popup-custom.html
 - https://sdk.paylike.io/examples/popup-donation.html
-
-You can find the source code of all above examples in this repository.
+- [Simple but complete webshop](https://github.com/paylike/webshop-example)
 
 ```html
 <script src="//sdk.paylike.io/2.js"></script>
