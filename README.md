@@ -23,7 +23,7 @@ Need help? Chat with us on Gitter or send an email: hello@paylike.io.
 - [Simple but complete webshop](https://github.com/paylike/webshop-example)
 
 ```html
-<script src="//sdk.paylike.io/2.js"></script>
+<script src="//sdk.paylike.io/3.js"></script>
 <script>
 	var paylike = Paylike('your key');
 
