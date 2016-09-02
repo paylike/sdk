@@ -13,8 +13,8 @@
 		var paylike = Paylike('public key');
 
 		paylike.popup({
-			currency: 'DKK',
-			amount: 1000,
+			currency: 'EUR',
+			amount: 10000,
 			custom: {
 				orderId: '<?=$orderId?>',
 			},
