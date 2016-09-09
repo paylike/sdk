@@ -3,7 +3,7 @@
 
 1. During checkout (frontend)
 
-	1. Open the popup (https://github.com/paylike/sdk - examples and documentation). Include at least an order reference (or a hash) in the custom data field which uniquely identifies the order.
+	1. Open the popup ([examples and documentation](https://github.com/paylike/sdk)). Include at least an order reference (or a hash) in the custom data field which uniquely identifies the order.
 
 	2. The callback for the popup will receive a transaction ID on a succesful payment. Send it to the server using a hidden form, a redirect (query) or an AJAX call.
 
@@ -50,3 +50,8 @@
 	```
 
 	Amount being EUR 100,00.
+
+Resources:
+
+- [Frontend SDK documentation](https://github.com/paylike/sdk)
+- [Full API reference and clients](https://github.com/paylike/api-docs)
