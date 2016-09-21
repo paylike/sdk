@@ -22,7 +22,7 @@
 			if (err)
 				return console.log(err);
 
-			location.href = '/complete-order.php?transactionId'+res.transaction.id;
+			location.href = '/complete-order.php?orderId=<?=$orderId?>&transactionId'+res.transaction.id;
 		});
 	</script>
 	```
