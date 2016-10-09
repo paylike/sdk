@@ -35,11 +35,9 @@
 	curl https://api.paylike.io/transactions/<transaction-id> -u :<secret-app-key>
 	```
 
-	Check that the currency, amount and unique order reference (or hash) match what you have on record and complete the order, otherwise void the transaction and fail:
-
-	```bash
-	curl https://api.paylike.io/transactions/<transaction-id>/voids -u :<secret-app-key> -d amount=10000
-	```
+	Check that the currency, amount and unique order reference (or hash) match
+	what you have on record and complete the order. If something does not
+	match, the payment should fail as the data could have been tampered.
 
 3. When shipping/delivering
 
@@ -50,6 +48,10 @@
 	```
 
 	Amount being EUR 100,00.
+
+In the case of digital products, preorders, vouchers, tickets or other
+"instant delivery"-scenarios where you would want to employ "instant capture",
+simply do the capture immediately after the verification in step 2.
 
 Resources:
 
