@@ -1,77 +1,59 @@
-# Paylike SDK
+# Paylike Web SDK
 
-Create transactions from customer's card details on the web with this SDK and
-your public key (found in our dashboard).
+Payments for the web.
 
-[Sign up for a free merchant account (free and instant)](https://paylike.io)
+[Sign up for a merchant account (it's free and instant)](https://paylike.io)
 
-Use the issue tracker here to file any bug reports or feature requests, we are
-happy to grow with your needs.
+Use the issue tracker to file any bug reports or feature requests.
 
-When implementing and testing, make sure to use a key from a test account,
-which will also allow you to test without https (e.g. locally).
+Make sure to use a key from a test account, which will also allow you to test
+without https (e.g. locally).
 
-Need help? Chat with us on Gitter or send an email: hello@paylike.io.
+Need help? Chat with us on Gitter or email: hello@paylike.io.
 
 [![Join the chat at https://gitter.im/paylike/sdk](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/paylike/sdk?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Examples
 
-- https://sdk.paylike.io/examples/popup-minimal.html
-- https://sdk.paylike.io/examples/popup-custom.html
-- https://sdk.paylike.io/examples/popup-donation.html
+- [Popup](https://sdk.paylike.io/examples/popup-minimal.html)
+- [Popup with custom fields](https://sdk.paylike.io/examples/popup-custom.html)
+- [Popup for donations](https://sdk.paylike.io/examples/popup-donation.html)
 - [Simple but complete webshop](https://github.com/paylike/webshop-example)
 
-```html
-<script src="//sdk.paylike.io/3.js"></script>
-<script>
-	var paylike = Paylike('your key');
-
-	paylike.popup({
-		currency: 'DKK',
-		amount: 1000,
-	}, function( err, res ){
-		if (err)
-			return console.log(err);
-
-		console.log(res.transaction.id);
-
-		alert('Thank you!');
-	});
-</script>
-```
-
-## Popup
+## Popup for a transaction
 
 ```js
 var paylike = Paylike('your key');
+
 paylike.popup(config, callback);
 ```
 
 ```js
+// config
 {
-	locale: String,			// pin the popup to a locale (e.g. en_US or en)
-
 	currency: String,		// ISO 4217 (e.g. "USD")
 	amount: Number,			// minor units (e.g. "200" is $ 2)
 
 	title: String,			// title text to show in popup
 	description: String,	// descriptive text to show in popup
 
+	locale: String,			// pin the popup to a locale (e.g. en_US or en)
+							// defaults to that of the browser
+
 	descriptor: String,		// text on customer bank statement (SEE RESTRICTIONS BELOW)
 
 	// data to pass along (objects, nested objects, arrays and primitives)
-	// this will be visible in your dashboard
-	// the limits are: keys < 100, depth < 10, key length < 100
+	// visible in your dashboard
+	// can be extracted using the API
+	// hard limits: keys < 100, depth < 10, key length < 100
 	custom: Object,
 
-	// additional fields to display in popup
+	// See "Additional fields" section below
 	fields: Array,
 }
 ```
 
-Most configuration options are optional. Only an amount and a currency are
-required.
+Only the amount and a currency is required for transactions.
 
 See this example of using `custom` and `fields`:
 https://sdk.paylike.io/examples/popup-custom.html
@@ -103,7 +85,7 @@ avoid losing transactions due to rejection by the popup.
 
 See https://github.com/paylike/descriptor for format and restrictions.
 
-#### Custom fields
+#### Additional fields
 
 ```js
 paylike.popup({
@@ -116,20 +98,75 @@ paylike.popup({
 		// elaborate custom field
 		{
 			name: 'email',
+			label: 'E-mail',	// same as `name` if not provided
 			type: 'email',
 			placeholder: 'user@example.com',
 			required: true,
+			value: email,		// provide a default value
 		},
 	],
 }, cb);
 ```
 
-You can even add a field with the class "amount", and it will allow users to
-set the amount.
+If you add a field with a name of "amount" it will allow users to dynamically
+choose the transaction amount.
+[See this example](https://sdk.paylike.io/examples/popup-donation.html).
 
-## Embedded form
+### Example
+
+```html
+<script src="//sdk.paylike.io/3.js"></script>
+<script>
+	var paylike = Paylike('your key');
+
+	paylike.popup({
+		currency: 'DKK',
+		amount: 1000,
+	}, function( err, res ){
+			if (err)
+				return console.log(err);
+
+		console.log(res.transaction.id);
+
+		alert('Thank you!');
+	});
+	</script>
+```
+
+## Popup to save (tokenize) a card for later use
+
+To store a card for later use from the server, you open the popup in the exact
+same manner as described above, but strictly without specifying either
+`amount` or `currency`. This will change the popup target from a transaction
+to a card token.
+
+### Example
+
+```js
+paylike.popup({
+	title: 'Add card',
+	description: 'Please enter your card details',
+}, function( err, r ){
+	if (err)
+		return console.warn(err);
+
+	console.log(r);	// { card: { id: ... } }
+});
+```
+
+Later on create a transaction from your server using our API:
+https://github.com/paylike/api-docs#from-a-saved-card.
+
+Make sure to read our section about
+[recurring payments](https://github.com/paylike/api-docs#recurring-payments).
+
+## Embedded form for transactions
 
 This is the method if you want to design your own payment form.
+
+You should be aware that the work required compared to the popup is
+substantial. We recommend all customers to implement the popup first then
+experiment with an embedded form in a later iteration.
 
 **Do not give the card number, expiry and cvc fields a name attribute, to
 ensure they are never sent to your server**
@@ -155,6 +192,17 @@ we are processing the payment.
 
 See [this example of a minimal form](examples/embedded-minimal.html) and [this
 of a more elaborate use](examples/embedded-complete.html).
+
+## Embedded form for tokenization
+
+Follow the guidelines from the section above but use the `tokenize` method
+instead of `pay`.
+
+```js
+var paylike = Paylike('your key');
+
+paylike.tokenize(selector, config, cb);
+```
 
 #### Utilities
 
