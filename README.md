@@ -204,7 +204,7 @@ var paylike = Paylike('your key');
 paylike.tokenize(selector, config, cb);
 ```
 
-#### Utilities
+### Utilities
 
 To speed up your development we expose some of the utility functions we make
 use of ourselves.
@@ -224,6 +224,14 @@ Paylike.assistExpiry(domNode)
 - prevent anything else than digits
 - enforce a valid (1-12) month and year (two or four digits)
 - assist by inserting "  /  " between month and year
+
+### 3-D Secure
+
+The popup supports 3-D Secure out of the box.
+
+If you wish to implement 3-D Secure support for an embedded form or just know
+more about the protocol please read this
+[introduction and implementation guide](3dsecure/index.md).
 
 ## Browser support
 
