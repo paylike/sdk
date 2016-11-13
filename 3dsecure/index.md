@@ -51,7 +51,20 @@ standard flow, then evolve your implementation to handle the special error
 
 ## Examples
 
-A request for step (1) could look like the following:
+Step (1) is preferably initiated from the client side, to avoid credit card
+details touching your server.
+
+If step (1) is initiated using the Web SDK, the call might look like this:
+
+```js
+paylike.pay('form.payment', {
+	currency: 'USD',
+	amount: 100,
+});
+```
+
+If initiated from a native app (iOS, Android, etc.) or the server it would do
+something equivalent to:
 
 ```sh
 $ curl 'https://gateway.paylike.io/transactions' \
@@ -66,8 +79,8 @@ $ curl 'https://gateway.paylike.io/transactions' \
 
 This is identical to any regular transaction.
 
-The response from the gateway (2) in case of 3-D Secure being required could
-look as:
+The response from the gateway (2) in case of 3-D Secure being required would
+be of the type:
 
 ```json
 {
@@ -142,7 +155,20 @@ window.addEventListener('message', function( e ){
 });
 ```
 
-With the `PaRes` in hand, you can now repeat the transaction (5):
+With the `PaRes` in hand, you can now repeat the transaction (5) as in step
+(1).
+
+Either using the Web SDK:
+
+```js
+paylike.pay('form.payment', {
+	currency: 'USD',
+	amount: 100,
+	tds: { pares: pares },
+});
+```
+
+Or from a native app or the server:
 
 ```sh
 $ curl 'https://gateway.paylike.io/transactions' \
