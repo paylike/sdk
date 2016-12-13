@@ -193,6 +193,8 @@ we are processing the payment.
 See [this example of a minimal form](examples/embedded-minimal.html) and [this
 of a more elaborate use](examples/embedded-complete.html).
 
+[See the list of processing errors](https://github.com/paylike/processing-errors).
+
 ## Embedded form for tokenization
 
 Follow the guidelines from the section above but use the `tokenize` method
