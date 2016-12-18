@@ -9,9 +9,9 @@ information to successfully implement 3-D Secure with Paylike.
 # How does 3-D Secure work?
 
 The idea of 3-D Secure is to allow the issuing bank to obtain a second form of
-authentication for a transaction (two factor authentication). If the
-transaction is approved by the bank the (financial) risk of unauthorized
-transactions are shifted from the merchant to the bank (liability shift).
+authentication for a transaction (two-factor authentication). If the
+transaction is approved by the bank, the (financial) risk of unauthorized
+transactions is shifted from the merchant to the bank (liability shift).
 
 This is currently implemented by the banks as a web server to which the
 merchant (e.g. a webshop) redirects the cardholder (e.g. a customer) with
@@ -29,10 +29,10 @@ You will need a live account at Paylike (free, no approval needed) with
 mandatory 3-D Secure (the default anyway). 3-D Secure can be conditionally
 enabled/disabled by Paylike based on a risk assessment.
 
-If you are using the Paylike Payment popup you do not have to read any
+If you are using the Paylike Payment popup, you do not have to read any
 further. 3-D Secure is supported and handled automatically inside the popup.
 
-However if you are developing a native application or going for a customized
+However, if you are developing a native application or going for a customized
 payment form and want to leverage 3-D Secure, here is the minimal information
 you need.
 
