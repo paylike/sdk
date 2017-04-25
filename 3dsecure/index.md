@@ -1,6 +1,6 @@
 Implementing 3-D Secure is a substantial work that can directly affect
 your conversion rate. We recommend all customers implement
-[our popup](https://github.com/paylike/sdk) which supports 3D-Secure and has
+[our popup](https://github.com/paylike/sdk) which supports 3-D Secure and has
 been extensively tested and improved over the years.
 
 This information is highly simplified to give you just enough
