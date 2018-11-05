@@ -9,9 +9,7 @@ Use the issue tracker to file any bug reports or feature requests.
 Make sure to use a key from a test account, which will also allow you to test
 without https (e.g. locally).
 
-Need help? Chat with us on Gitter or email: hello@paylike.io.
-
-[![Join the chat at https://gitter.im/paylike/sdk](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/paylike/sdk?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Need help? Reach out on email: [hello@paylike.io](https://paylike.io/contact).
 
 ## Examples
 
