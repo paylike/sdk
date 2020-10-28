@@ -219,7 +219,7 @@ Visa | Mastercard | Status
 
 ## Testing
 
-Testing is by far the hardest part as you control only a very small part of
-the infrastructure. We are working hard on publishing more tools in this area
-in future, but for now you will have to rely on creating your own mocks and
-doing manual integration tests with real cards on a live account.
+Testing is difficult as you control only one part of the infrastructure. We
+are working hard on publishing more tools in this area, but for now you will
+have to rely on creating your own mocks and doing manual integration tests
+with real cards on a live account.
