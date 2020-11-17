@@ -179,7 +179,7 @@ $ curl 'https://gateway.paylike.io/transactions' \
 	-d "card[expiry][month]=08" \
 	-d "card[expiry][year]=2018" \
 	-d "card[code]=123" \
-	-d "tds[pares]=<string pares>"
+	--data-urlencode "tds[pares]=<string pares>"
 ```
 
 The gateway will return a processing error (code 31) if the 3-D Secure was not
