@@ -29,7 +29,8 @@
 
 	<script src="https://sdk.paylike.io/7.js"></script>
 	<script>
-		const paylike = Paylike('e9f468a8-4b63-46a5-aaf3-0911312bae27')
+		const key = console.error('Insert your Paylike public key')
+		const paylike = Paylike(key)
 
 		document.querySelector('button').addEventListener('click', pay)
 
