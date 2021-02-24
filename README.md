@@ -6,57 +6,100 @@ Payments for the web.
 
 Use the issue tracker to file any bug reports or feature requests.
 
-Make sure to use a key from a test account, which will also allow you to test
-without https (e.g. locally).
+Make sure to use a key from a test account and set the `test` parameter, which
+will also allow you to test without https (e.g. locally).
 
 Need help? Reach out on email: [hello@paylike.io](https://paylike.io/contact).
 
 ## Examples
 
-- [Popup](https://sdk.paylike.io/examples/popup-minimal.html)
-- [Popup with custom fields](https://sdk.paylike.io/examples/popup-custom.html)
-- [Popup for donations](https://sdk.paylike.io/examples/popup-donation.html)
-- [Simple but complete webshop](https://github.com/paylike/webshop-example)
-
-## Popup for a transaction
-
-```js
-var paylike = Paylike('your key')
-
-paylike.popup(config, callback)
+```html
+<script src="//sdk.paylike.io/10.js"></script>
+<script>
+  const paylike = Paylike({key: '57d23ce1-b651-4b37-8bfb-d4077c3bbf38'})
+  paylike.pay(
+    {
+      test: true,
+      amount: {currency: 'EUR', exponent: 2, value: 1499},
+      title: 'The Any Tool Shop',
+      description: '2x your favorite tool',
+      custom: {orderId: 1234},
+      text: 'Any Tool Shop 1234',
+    },
+    (err, result) => {
+      if (err) return console.log(err)
+      console.log(result.transaction.id)
+    }
+  )
+</script>
 ```
 
+- [Popup](examples/popup-custom.html)
+- [Popup with custom fields](examples/popup-donation.html)
+- [Popup for donations](examples/popup-minimal.html)
+
+See also the [standard flow example](standard-flow.md) which includes the
+following backend API calls.
+
+## Reference
+
 ```js
+const paylike = Paylike({key: String})
+paylike.pay(config, (err, r) => console.log(err, r))
+
 // config
 {
-	currency: String,		// ISO 4217 (e.g. "USD")
-	amount: Number,			// minor units (e.g. "200" is $ 2)
+  amount: {
+    currency: String, // ISO 4217 (e.g. "EUR")
+    exponent: Number, // the number of fractional digits
+    value: Number, // integer
+  },
+  // the amount to be paid now, can be omitted for "save card" (see "Plans"
+  // and "unplanned")
+  // example: {currency: 'EUR', exponent: 2, value: 1499} (EUR 14.99)
 
-	recurring: Boolean,	// are the card details being reused?
+  test: Boolean, // MUST be "true" if using a test key
+  title: String, // title text to show in popup
+  description: String, // descriptive text to show in popup
 
-	title: String,			// title text to show in popup
-	description: String,	// descriptive text to show in popup
+  locale: String, // pin the popup to a locale (e.g. en_US or en)
+  // defaults to that of the browser
 
-	locale: String,			// pin the popup to a locale (e.g. en_US or en)
-							// defaults to that of the browser
+  text: String,
+  // text on customer bank statement (SEE NOTES BELOW)
 
-	descriptor: String,		// text on customer bank statement (SEE RESTRICTIONS BELOW)
+  custom: Object,
+  // data to pass along (objects, nested objects, arrays and primitives)
+  // visible in your dashboard
+  // can be extracted using the API
+  // keep it below 50K
 
-	// data to pass along (objects, nested objects, arrays and primitives)
-	// visible in your dashboard
-	// can be extracted using the API
-	// hard limits: keys < 100, depth < 10, key length < 100
-	custom: Object,
+  fields: Array,
+  // see "Additional fields" section below
 
-	// See "Additional fields" section below
-	fields: Array,
+  plan: Object, // see "Plans" below
+  unplanned: {
+    // see "Unplanned" below
+    merchant: Boolean,
+    customer: Boolean,
+  },
+
+  key: String,
+  // override key from factory function
 }
+
+// err
+'superseded' // the payment popup was closed by the user
+'closed' // another payment popup was opened, closing this one
+Error // in case of unexpected events
 ```
 
-Only the amount and a currency is required for transactions.
+All configuration fields are optional, but either `amount` or one of `plan` and
+`unplanned` should be provided. All three may also be present (e.g. a gym
+subscription with an upfront payment, monthly charge, and pay-as-you-go
+classes).
 
-See this example of using `custom` and `fields`:
-https://sdk.paylike.io/examples/popup-custom.html
+`key` must be provided for either the factory function or `.pay`.
 
 The callback is called in "node-style": `callback(error, response)`.
 
@@ -64,183 +107,138 @@ The response will look like this:
 
 ```js
 {
-	transaction: {
-		id: String,
-	},
-	custom: { ... },
+  transaction: {
+    id: String,
+  },
+
+  custom: { ... },
 }
 ```
 
-If the user closes the popup the `error` variable will have a value of
-`closed`.
+If the user closes the popup the `error` variable will have a value of `closed`.
 
-### Currencies
+If another popup is opened in the meantime `error` variable will have a value of
+`superseded`.
 
-All supported currencies are listed at https://github.com/paylike/currencies
+### Currency (`amount.currency`)
 
-### Descriptor
+All supported currencies are listed at https://github.com/paylike/currencies.
 
-Passing a descriptor you need to be absolutely sure to follow the format to
-avoid losing transactions due to rejection by the popup.
+### Text (`text`)
 
-See https://github.com/paylike/descriptor for format and restrictions.
+The field is optional. If none is provided, the merchant's "descriptor" is used.
 
-### Additional fields
+The maximum length is 1024 characters. For payment cards (such as Visa,
+Mastercard, etc.) the length must be at least 2 characters, it will be truncated
+to 22 characters, and only characters matching `/[\x20-\x7E]/` are accepted
+(others are replaced).
+
+The text is forwarded to be shown on the customer's bank statement or similar.
+There is no guarantee as to how the issuer of the customer's payment instrument
+(e.g. their bank) will use or show this text.
+
+### Additional fields (`fields`)
 
 ```js
-paylike.popup({
-	amount: 1000,
-	currency: 'DKK',
-	fields: [
-		// simple custom field
-		'name',
+paylike.popup(
+  {
+    amount: 1000,
+    currency: 'DKK',
+    fields: [
+      // simple custom field
+      'name',
 
-		// elaborate custom field
-		{
-			name: 'email',
-			label: 'E-mail',	// same as `name` if not provided
-			type: 'email',
-			placeholder: 'user@example.com',
-			required: true,
-			value: email,		// provide a default value
-		},
-	],
-}, cb)
+      // elaborate custom field
+      {
+        name: 'email',
+        label: 'E-mail', // same as `name` if not provided
+        type: 'email',
+        placeholder: 'user@example.com',
+        required: true,
+        value: email, // provide a default value
+      },
+    ],
+  },
+  cb
+)
 ```
 
 If you add a field with a name of "amount" it will allow users to dynamically
 choose the transaction amount.
 [See this example](https://sdk.paylike.io/examples/popup-donation.html).
 
-### Example
+### Save (tokenize) a card for later use (subscriptions, installments, pay-as-you-go etc.)
 
-```html
-<script src="//sdk.paylike.io/6.js"></script>
-<script>
-	var paylike = Paylike('your key')
+To reuse a card for later transactions from your server, specify at least one of
+`plan` and `unplanned`.
 
-	paylike.popup({
-		currency: 'DKK',
-		amount: 1000,
-	}, (err, res) => {
-			if (err)
-				return console.log(err)
-
-		console.log(res.transaction.id)
-
-		alert('Thank you!')
-	})
-	</script>
-```
-
-## Popup to save (tokenize) a card for later use
-
-To store a card for later use from the server, you open the popup in the exact
-same manner as described above, but strictly without specifying either
-`amount` or `currency`. This will change the popup target from a transaction
-to a card token.
-
-### Example
-
-```js
-paylike.popup({
-	title: 'Add card',
-	description: 'Please enter your card details',
-}, (err, r) => {
-	if (err)
-		return console.warn(err)
-
-	console.log(r)	// { card: { id: ... } }
-})
-```
+You can omit `amount` entirely if no amount is due immedately, but it can
+validly be combined with `plan` and `unplanned` for a purchase.
 
 Later on create a transaction from your server using our API:
-https://github.com/paylike/api-docs#from-a-saved-card.
+[create a transaction using a previous transaction](https://github.com/paylike/api-docs#using-a-previous-transaction).
 
 Make sure to read our section about
 [recurring payments](https://github.com/paylike/api-docs#recurring-payments).
 
-## Embedded form for transactions
+#### Plans (`plan`)
 
-This is the method if you want to design your own payment form.
+Please see [this document](plan.md).
 
-You should be aware that the work required compared to the popup is
-substantial. We recommend all customers implement the popup first then
-experiment with an embedded form in a later iteration.
+This is required for planned subsequent payments to ensure compliance and high
+approval rates.
 
-**Do not give the card number, expiry and cvc fields a name attribute, to
-ensure they are never sent to your server**
+##### Example
 
 ```js
-var paylike = Paylike('your key')
-
-paylike.pay(selector, config, cb)
+{
+  plan: {
+    amount: {currency: 'EUR', value: 999, exponent: 2},
+    repeat: {
+      interval: {unit: 'month'},
+    },
+  },
+}
 ```
 
-`selector` is the css selector of your form element, it will accept a DOM node
-as well.
+A monthly subscription of EUR 9.99.
 
-Your form is required to have input fields with the classes:
+#### Unplanned (`unplanned`)
 
-- `card-number`
-- `card-expiry` (alternatively `card-expiry-month` and `card-expiry-year`)
-- `card-code`
+Flag the types of unplanned payments the card will be used for. The supported
+types are:
 
-You probably want to call `paylike.pay` when the submit event fires on the
-form. Make sure to do error checking and show some sort of loading state while
-we are processing the payment.
+- `customer` (initiated by the customer from your website/application)
+- `merchant` (initiated by the merchant or an off-site customer)
 
-See [this example of a minimal form](examples/embedded-minimal.html) and [this
-of a more elaborate use](examples/embedded-complete.html).
+This is required for unplanned subsequent payments to ensure compliance and high
+approval rates.
 
-[See the list of processing errors](https://github.com/paylike/processing-errors).
-
-## Embedded form for tokenization
-
-Follow the guidelines from the section above but use the `tokenize` method
-instead of `pay`.
+##### Example
 
 ```js
-var paylike = Paylike('your key')
-
-paylike.tokenize(selector, config, cb)
+{
+  // ...
+  unplanned: {merchant: true},
+}
 ```
 
-A "card ID" is returned rather than a "transaction ID".
+## Custom payment form
 
-### Utilities
+If you are looking to build a custom payment form, make sure to visit these
+tools to ease the development:
 
-To speed up your development we expose some of the utility functions we make
-use of ourselves.
+- [JavaScript (web) client](https://github.com/paylike/js-client)
+- [Card form helpers](https://github.com/paylike/js-card-form-tools)
 
-```js
-Paylike.assistNumber(domNode)
-```
-
-- prevent anything else than digits
-- add a `visa` or `mastercard` class as soon as possible
-- split the number after each run of four digits
-
-```js
-Paylike.assistExpiry(domNode)
-```
-
-- prevent anything else than digits
-- enforce a valid (1-12) month and year (two or four digits)
-- assist by inserting "  /  " between month and year
-
-### 3-D Secure
-
-The popup supports 3-D Secure out of the box.
-
-If you wish to implement 3-D Secure support for an embedded form or just know
-more about the protocol please read this
-[introduction and implementation guide](3dsecure/index.md).
+In the
+[payments API reference](https://github.com/paylike/api-reference/blob/master/payments/index.md)
+you can find the relevant details for submitting payments.
 
 ## Browser support
 
-The SDK should work in all regular browsers capable of modern secure
-communication as required in most jurisdictions for payments.
+The SDK is tested in all regular browsers capable of conducting modern secure
+communication as required for payments.
 
-If you have issues with an environment, please open an issue or drop us an
-email at hello@paylike.io.
+If you have issues with an environment, please open an issue or drop us an email
+at hello@paylike.io.

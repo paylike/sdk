@@ -1,49 +1,47 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<link rel="stylesheet" href="./styles.css">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+		/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<link rel="stylesheet" href="./styles.css" />
 
-	<title>Paylike.io SDK examples</title>
-</head>
-<body>
-	<p>
-		This example is the minimal implementation of the popup.
-	</p>
-	<p>
-		For test purposes use the card number <code>4100 0000 0000 0000</code>
-		with any expiry date and CVC. Use <code>4200 0000 0000 0000</code> as
-		an invalid card number.
-	</p>
-	<button>Try it (pay)</button>
-	<ul>
-		<li><a href="popup-custom.html">Elaborate popup example</a></li>
-		<li><a href="popup-donation.html">Donations popup example</a></li>
-	</ul>
+		<title>Paylike.io SDK examples</title>
+	</head>
+	<body>
+		<p>This example is the minimal implementation of the popup.</p>
+		<button>Try it (pay)</button>
+		<ul>
+			<li><a href="popup-custom.html">Elaborate popup example</a></li>
+			<li><a href="popup-donation.html">Donations popup example</a></li>
+		</ul>
 
-	<a href="https://github.com/paylike/sdk">SDK documentation on GitHub</a>
+		<a href="https://github.com/paylike/sdk">SDK documentation on GitHub</a>
 
-	<script src="https://sdk.paylike.io/6.js"></script>
-	<script>
-		const key = console.error('Insert your Paylike public key')
-		const paylike = Paylike(key)
+		<script src="https://sdk.paylike.io/10.js"></script>
+		<script>
+			const key = console.error('Insert your Paylike public key')
+			const paylike = Paylike({key})
 
-		document.querySelector('button').addEventListener('click', pay)
+			document.querySelector('button').addEventListener('click', pay)
 
-		function pay(){
-			paylike.popup({
-				currency: 'USD',
-				amount: 2000,
-			}, (err, r) => {
-				if (err)
-					return console.warn(err)
+			function pay() {
+				paylike.pay(
+					{
+						amount: {currency: 'USD', exponent: 2, value: 2000},
+					},
+					(err, r) => {
+						if (err) return console.log(err)
 
-				console.log(r)	// { transaction: { id: ... } }
-			})
-		}
-	</script>
-</body>
+						console.log(r)
+						// location.href = '/thank-you'
+					}
+				)
+			}
+		</script>
+	</body>
 </html>

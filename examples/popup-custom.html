@@ -1,82 +1,81 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<link rel="stylesheet" href="./styles.css">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+		/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<link rel="stylesheet" href="./styles.css" />
 
-	<title>Paylike.io SDK examples</title>
-</head>
-<body>
-	<p>
-		This example uses most features of the popup and attaches custom meta
-		data to the transaction.
-	</p>
-	<p>
-		For test purposes use the card number <code>4100 0000 0000 0000</code>
-		with any expiry date and CVC. Use <code>4200 0000 0000 0000</code> as
-		an invalid card number.
-	</p>
-	<button>Try it (pay)</button>
-	<ul>
-		<li><a href="popup-minimal.html">Minimal popup example</a></li>
-		<li><a href="popup-donation.html">Donations popup example</a></li>
-	</ul>
+		<title>Paylike.io SDK examples</title>
+	</head>
+	<body>
+		<p>
+			This example uses most features of the popup and attaches custom
+			meta data to the transaction.
+		</p>
+		<button>Try it (pay)</button>
+		<ul>
+			<li><a href="popup-minimal.html">Minimal popup example</a></li>
+			<li><a href="popup-donation.html">Donations popup example</a></li>
+		</ul>
 
-	<a href="https://github.com/paylike/sdk">SDK documentation on GitHub</a>
+		<a href="https://github.com/paylike/sdk">SDK documentation on GitHub</a>
 
-	<script src="https://sdk.paylike.io/6.js"></script>
-	<script>
-		const key = console.error('Insert your Paylike public key')
-		const paylike = Paylike(key)
+		<script src="https://sdk.paylike.io/10.js"></script>
+		<script>
+			const key = console.error('Insert your Paylike public key')
+			const paylike = Paylike({key})
 
-		document.querySelector('button').addEventListener('click', pay)
+			document.querySelector('button').addEventListener('click', pay)
 
-		function pay(){
-			paylike.popup({
-				// locale: 'da',  // pin popup to a locale
-
-				title: 'The Fashion Store',
-				description: '2x very modern jeans & 1x ultra fashionable belt to be delivered by Monday 4th.',
-
-				currency: 'EUR',
-				amount: 19995,
-
-				// saved on transaction for retrieval from dashboard or API
-				custom: {
-					// arrays are fine
-					products: [
-						// nested objects will do
-						{ SKU: 'VMJ', quantity: 2 },
-						{ SKU: 'UFB', quantity: 1 },
-					],
-				},
-
-				// data from fields will be merged with custom
-				fields: [
-					// elaborate custom field
+			function pay() {
+				paylike.pay(
 					{
-						name: 'email',
-						type: 'email',
-						placeholder: 'user@example.com',
-						value: 'johndoe@example.com',
-						required: true,
+						// locale: 'da',  // pin popup to a locale
+
+						title: 'The Fashion Store',
+						description:
+							'2x very modern jeans & 1x ultra fashionable belt to be delivered by Monday 4th.',
+
+						amount: {currency: 'EUR', exponent: 2, value: 19995},
+
+						// saved on transaction for retrieval from dashboard or API
+						custom: {
+							// arrays are fine
+							products: [
+								// nested objects will do
+								{SKU: 'VMJ', quantity: 2},
+								{SKU: 'UFB', quantity: 1},
+							],
+						},
+
+						// data from fields will be merged with custom
+						fields: [
+							// elaborate custom field
+							{
+								name: 'email',
+								type: 'email',
+								label: 'E-mail',
+								placeholder: 'user@example.com',
+								required: true,
+							},
+
+							// simple custom field
+							'note',
+						],
 					},
+					(err, res) => {
+						if (err) return console.log(err)
 
-					// simple custom field
-					'note',
-				],
-			}, (err, res) => {
-				if (err)
-					return console.log(err)
-
-				console.log(res)
-
-				// location.href = '/thank-you'
-			})
-		}
-	</script>
-</body>
+						console.log(res)
+						// location.href = '/thank-you'
+					}
+				)
+			}
+		</script>
+	</body>
 </html>

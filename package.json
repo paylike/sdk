@@ -1,0 +1,21 @@
+{
+	"name": "@paylike/sdk",
+	"repository": "paylike/sdk",
+	"prettier": {
+		"semi": false,
+		"singleQuote": true,
+		"useTabs": true,
+		"bracketSpacing": false,
+		"tabWidth": 4,
+		"proseWrap": "always",
+		"overrides": [
+			{
+				"files": "*.md",
+				"options": {
+					"useTabs": false,
+					"tabWidth": 2
+				}
+			}
+		]
+	}
+}
