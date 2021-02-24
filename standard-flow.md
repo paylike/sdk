@@ -8,7 +8,7 @@
 	2. The callback for the popup will receive a transaction ID on a succesful payment. Send it to the server using a hidden form, a redirect (query) or an AJAX call.
 
 	```html
-	<script src="//sdk.paylike.io/7.js"></script>
+	<script src="//sdk.paylike.io/6.js"></script>
 	<script>
 		var paylike = Paylike('public key')
 

@@ -83,7 +83,7 @@ avoid losing transactions due to rejection by the popup.
 
 See https://github.com/paylike/descriptor for format and restrictions.
 
-#### Additional fields
+### Additional fields
 
 ```js
 paylike.popup({
@@ -113,7 +113,7 @@ choose the transaction amount.
 ### Example
 
 ```html
-<script src="//sdk.paylike.io/7.js"></script>
+<script src="//sdk.paylike.io/6.js"></script>
 <script>
 	var paylike = Paylike('your key')
 
