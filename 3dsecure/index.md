@@ -60,7 +60,7 @@ If step (1) is initiated using the Web SDK, the call might look like this:
 paylike.pay('form.payment', {
 	currency: 'USD',
 	amount: 100,
-});
+})
 ```
 
 If initiated from a native app (iOS, Android, etc.) or the server it would do
@@ -100,42 +100,42 @@ You are then supposed to redirect the user using a POST to the ACS url.
 Example JavaScript code doing so is:
 
 ```js
-var $form = ce('form', {
+const $form = ce('form', {
 	method: 'POST',
 	// target: 'acs-window', // iframe[name]
 	action: url,
-});
+})
 
 $form.appendChild(ce('input', {
 	type: 'hidden',
 	name: 'PaReq',
 	value: pareq,
-}));
+}))
 
 $form.appendChild(ce('input', {
 	type: 'hidden',
 	name: 'TermUrl',
 	value: returnUrl,
-}));
+}))
 
 $form.appendChild(ce('input', {
 	type: 'hidden',
 	name: 'MD',
 	value: orderId,
-}));
+}))
 
-document.body.appendChild($form);
+document.body.appendChild($form)
 
-$form.submit();
+$form.submit()
 
-function ce( tag, opts ){
-	var $ = document.createElement(tag);
+function ce(tag, opts){
+	const $ = document.createElement(tag)
 
-	Object.keys(opts).forEach(function( key ){
-		$[key] = opts[key];
-	});
+	Object.keys(opts).forEach((key) => {
+		$[key] = opts[key]
+	})
 
-	return $;
+	return $
 }
 ```
 
@@ -151,8 +151,8 @@ key (mind the lowercase). Capture it using something like:
 
 ```js
 window.addEventListener('message', function( e ){
-	var pares = e.data && e.data.pares;
-});
+	const pares = e.data && e.data.pares
+})
 ```
 
 With the `PaRes` in hand, you can now repeat the transaction (5) as in step
@@ -164,8 +164,8 @@ Either using the Web SDK:
 paylike.pay('form.payment', {
 	currency: 'USD',
 	amount: 100,
-	tds: { pares: pares },
-});
+	tds: {pares: pares},
+})
 ```
 
 Or from a native app or the server:
@@ -197,8 +197,8 @@ script will decode one:
 ```js
 #!/usr/bin/env node
 
-var zlib = require('zlib');
-var base64 = require('base64-stream');
+const zlib = require('zlib')
+const base64 = require('base64-stream')
 
 process.stdin
 	.pipe(base64.decode())

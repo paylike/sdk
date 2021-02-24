@@ -10,7 +10,7 @@
 	```html
 	<script src="//sdk.paylike.io/3.js"></script>
 	<script>
-		var paylike = Paylike('public key');
+		var paylike = Paylike('public key')
 
 		paylike.popup({
 			currency: 'EUR',
@@ -18,12 +18,12 @@
 			custom: {
 				orderId: '<?=$orderId?>',
 			},
-		}, function( err, res ){
+		}, (err, res) => {
 			if (err)
-				return console.log(err);
+				return console.log(err)
 
-			location.href = '/complete-order.php?orderId=<?=$orderId?>&transactionId='+res.transaction.id;
-		});
+			location.href = '/complete-order.php?orderId=<?=$orderId?>&transactionId='+res.transaction.id
+		})
 	</script>
 	```
 

@@ -21,9 +21,9 @@ Need help? Reach out on email: [hello@paylike.io](https://paylike.io/contact).
 ## Popup for a transaction
 
 ```js
-var paylike = Paylike('your key');
+var paylike = Paylike('your key')
 
-paylike.popup(config, callback);
+paylike.popup(config, callback)
 ```
 
 ```js
@@ -103,7 +103,7 @@ paylike.popup({
 			value: email,		// provide a default value
 		},
 	],
-}, cb);
+}, cb)
 ```
 
 If you add a field with a name of "amount" it will allow users to dynamically
@@ -115,19 +115,19 @@ choose the transaction amount.
 ```html
 <script src="//sdk.paylike.io/3.js"></script>
 <script>
-	var paylike = Paylike('your key');
+	var paylike = Paylike('your key')
 
 	paylike.popup({
 		currency: 'DKK',
 		amount: 1000,
-	}, function( err, res ){
+	}, (err, res) => {
 			if (err)
-				return console.log(err);
+				return console.log(err)
 
-		console.log(res.transaction.id);
+		console.log(res.transaction.id)
 
-		alert('Thank you!');
-	});
+		alert('Thank you!')
+	})
 	</script>
 ```
 
@@ -144,12 +144,12 @@ to a card token.
 paylike.popup({
 	title: 'Add card',
 	description: 'Please enter your card details',
-}, function( err, r ){
+}, (err, r) => {
 	if (err)
-		return console.warn(err);
+		return console.warn(err)
 
-	console.log(r);	// { card: { id: ... } }
-});
+	console.log(r)	// { card: { id: ... } }
+})
 ```
 
 Later on create a transaction from your server using our API:
@@ -170,9 +170,9 @@ experiment with an embedded form in a later iteration.
 ensure they are never sent to your server**
 
 ```js
-var paylike = Paylike('your key');
+var paylike = Paylike('your key')
 
-paylike.pay(selector, config, cb);
+paylike.pay(selector, config, cb)
 ```
 
 `selector` is the css selector of your form element, it will accept a DOM node
@@ -199,9 +199,9 @@ Follow the guidelines from the section above but use the `tokenize` method
 instead of `pay`.
 
 ```js
-var paylike = Paylike('your key');
+var paylike = Paylike('your key')
 
-paylike.tokenize(selector, config, cb);
+paylike.tokenize(selector, config, cb)
 ```
 
 ### Utilities

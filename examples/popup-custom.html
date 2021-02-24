@@ -29,9 +29,9 @@
 
 	<script src="https://sdk.paylike.io/3.js"></script>
 	<script>
-		var paylike = Paylike('e9f468a8-4b63-46a5-aaf3-0911312bae27');
+		const paylike = Paylike('e9f468a8-4b63-46a5-aaf3-0911312bae27')
 
-		document.querySelector('button').addEventListener('click', pay);
+		document.querySelector('button').addEventListener('click', pay)
 
 		function pay(){
 			paylike.popup({
@@ -67,14 +67,14 @@
 					// simple custom field
 					'note',
 				],
-			}, function( err, res ){
+			}, (err, res) => {
 				if (err)
-					return console.log(err);
+					return console.log(err)
 
-				console.log(res);
+				console.log(res)
 
-				// location.href = '/thank-you';
-			});
+				// location.href = '/thank-you'
+			})
 		}
 	</script>
 </body>

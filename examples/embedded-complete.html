@@ -38,24 +38,24 @@
 
 	<script src="https://sdk.paylike.io/3.js"></script>
 	<script>
-		var paylike = Paylike('e9f468a8-4b63-46a5-aaf3-0911312bae27', { style: false });
+		const paylike = Paylike('e9f468a8-4b63-46a5-aaf3-0911312bae27', { style: false })
 
-		var $form = document.querySelector('form#checkout');
+		const $form = document.querySelector('form#checkout')
 
-		var $error = $form.querySelector('p.error');
-		var $submit = $form.querySelector('input[type=submit]');
+		const $error = $form.querySelector('p.error')
+		const $submit = $form.querySelector('input[type=submit]')
 
-		var $email = $form.querySelector('input[name=email]');
-		var $name = $form.querySelector('input[name=name]');
+		const $email = $form.querySelector('input[name=email]')
+		const $name = $form.querySelector('input[name=name]')
 
-		Paylike.assistNumber($form.querySelector('input.card-number'));
-		Paylike.assistExpiry($form.querySelector('input.card-expiry'));
+		Paylike.assistNumber($form.querySelector('input.card-number'))
+		Paylike.assistExpiry($form.querySelector('input.card-expiry'))
 
-		$form.addEventListener('submit', function( e ){
-			e.preventDefault();
+		$form.addEventListener('submit', (e) => {
+			e.preventDefault()
 
-			$submit.disabled = true;
-			$error.textContent = '';
+			$submit.disabled = true
+			$error.textContent = ''
 
 			paylike.pay($form, {
 				currency: 'DKK',
@@ -66,16 +66,16 @@
 					email: $email.value,
 					name: $name.value,
 				},
-			}, function( err, r ){
+			}, (err, r) => {
 				if (err) {
-					$submit.disabled = false;
-					$error.textContent = err.message || err;
-					return;
+					$submit.disabled = false
+					$error.textContent = err.message || err
+					return
 				}
 
-				console.log(r);	// { transaction: { id: ... } }
-			});
-		});
+				console.log(r)	// { transaction: { id: ... } }
+			})
+		})
 	</script>
 </body>
 </html>

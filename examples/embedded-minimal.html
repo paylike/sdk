@@ -15,24 +15,24 @@
 
 	<script src="https://sdk.paylike.io/3.js"></script>
 	<script>
-		var paylike = Paylike('e9f468a8-4b63-46a5-aaf3-0911312bae27', { style: false });
-		// var paylike = Paylike('your-key');
+		const paylike = Paylike('e9f468a8-4b63-46a5-aaf3-0911312bae27', { style: false })
+		// const paylike = Paylike('your-key')
 
-		var $form = document.querySelector('form#checkout');
+		const $form = document.querySelector('form#checkout')
 
-		$form.addEventListener('submit', function( e ){
-			e.preventDefault();
+		$form.addEventListener('submit', (e) => {
+			e.preventDefault()
 
 			paylike.pay($form, {
 				currency: 'DKK',
 				amount: 10000,		// 100,00 kr.
-			}, function( err, r ){
+			}, (err, r) => {
 				if (err)
-					return console.warn(err);
+					return console.warn(err)
 
-				console.log(r);	// { transaction: { id: ... } }
-			});
-		});
+				console.log(r)	// { transaction: { id: ... } }
+			})
+		})
 	</script>
 </body>
 </html>

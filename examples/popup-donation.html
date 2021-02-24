@@ -28,9 +28,9 @@
 
 	<script src="https://sdk.paylike.io/3.js"></script>
 	<script>
-		var paylike = Paylike('e9f468a8-4b63-46a5-aaf3-0911312bae27');
+		const paylike = Paylike('e9f468a8-4b63-46a5-aaf3-0911312bae27')
 
-		document.querySelector('button').addEventListener('click', donate);
+		document.querySelector('button').addEventListener('click', donate)
 
 		function donate(){
 			paylike.popup({
@@ -48,18 +48,18 @@
 						required: true,
 					},
 				],
-			}, function( err, r ){
+			}, (err, r) => {
 				if (err)
-					return console.log(err);
+					return console.log(err)
 
-				console.log(r);
+				console.log(r)
 
 				/*
 				You could also redirect the user:
 
-				location.href = '/thank-you';
+				location.href = '/thank-you'
 				*/
-			});
+			})
 		}
 	</script>
 </body>

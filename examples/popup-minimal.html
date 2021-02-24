@@ -28,20 +28,20 @@
 
 	<script src="https://sdk.paylike.io/3.js"></script>
 	<script>
-		var paylike = Paylike('e9f468a8-4b63-46a5-aaf3-0911312bae27');
+		const paylike = Paylike('e9f468a8-4b63-46a5-aaf3-0911312bae27')
 
-		document.querySelector('button').addEventListener('click', pay);
+		document.querySelector('button').addEventListener('click', pay)
 
 		function pay(){
 			paylike.popup({
 				currency: 'USD',
 				amount: 2000,
-			}, function( err, r ){
+			}, (err, r) => {
 				if (err)
-					return console.warn(err);
+					return console.warn(err)
 
-				console.log(r);	// { transaction: { id: ... } }
-			});
+				console.log(r)	// { transaction: { id: ... } }
+			})
 		}
 	</script>
 </body>
