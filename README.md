@@ -113,7 +113,7 @@ choose the transaction amount.
 ### Example
 
 ```html
-<script src="//sdk.paylike.io/3.js"></script>
+<script src="//sdk.paylike.io/7.js"></script>
 <script>
 	var paylike = Paylike('your key')
 
