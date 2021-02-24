@@ -235,20 +235,8 @@ more about the protocol please read this
 
 ## Browser support
 
-The SDK uses XMLHttpRequest and CORS which is supported by all modern
-browsers.
+The SDK should work in all regular browsers capable of conducting modern
+secure communication as required in most jurisdictions for payments.
 
-The current SDK has been tested successfully with:
-
-- Firefox 35+
-- Chrome 31+
-- Chrome for Android 41+
-- Opera 27+
-- Safari 6.1+ (incl. iPhone 4S with iOS 6)
-- IE 10+ (incl. Windows Phone)
-
-It probably works just fine on much older versions of Chrome, Firefox and
-Opera even though we have not tested that.
-
-If you have issues with an environment or need specific support for a browser,
-please just open an issue and we will have a look.
+If you have issues with an environment, please open an issue or drop us an
+email at hello@paylike.io.
