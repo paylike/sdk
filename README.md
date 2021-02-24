@@ -204,6 +204,8 @@ var paylike = Paylike('your key')
 paylike.tokenize(selector, config, cb)
 ```
 
+A "card ID" is returned rather than a "transaction ID".
+
 ### Utilities
 
 To speed up your development we expose some of the utility functions we make
