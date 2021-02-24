@@ -163,7 +163,7 @@ Make sure to read our section about
 This is the method if you want to design your own payment form.
 
 You should be aware that the work required compared to the popup is
-substantial. We recommend all customers to implement the popup first then
+substantial. We recommend all customers implement the popup first then
 experiment with an embedded form in a later iteration.
 
 **Do not give the card number, expiry and cvc fields a name attribute, to
