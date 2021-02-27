@@ -239,8 +239,8 @@ more about the protocol please read this
 
 ## Browser support
 
-The SDK should work in all regular browsers capable of conducting modern
-secure communication as required in most jurisdictions for payments.
+The SDK should work in all regular browsers capable of modern secure
+communication as required in most jurisdictions for payments.
 
 If you have issues with an environment, please open an issue or drop us an
 email at hello@paylike.io.
