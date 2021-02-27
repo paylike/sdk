@@ -32,6 +32,8 @@ paylike.popup(config, callback)
 	currency: String,		// ISO 4217 (e.g. "USD")
 	amount: Number,			// minor units (e.g. "200" is $ 2)
 
+	recurring: Boolean,	// are the card details being reused?
+
 	title: String,			// title text to show in popup
 	description: String,	// descriptive text to show in popup
 
