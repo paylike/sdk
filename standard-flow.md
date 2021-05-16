@@ -10,7 +10,7 @@
       an AJAX call.
 
       ```html
-      <script src="//sdk.paylike.io/10.js"></script>
+      <script src="https://sdk.paylike.io/10.js"></script>
       <script>
       	const paylike = Paylike({key: '57d23ce1-b651-4b37-8bfb-d4077c3bbf38'})
       	paylike.pay(
