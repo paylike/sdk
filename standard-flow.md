@@ -12,23 +12,23 @@
       ```html
       <script src="https://sdk.paylike.io/10.js"></script>
       <script>
-      	const paylike = Paylike({key: '57d23ce1-b651-4b37-8bfb-d4077c3bbf38'})
-      	paylike.pay(
-      		{
-      			test: true,
-      			amount: {currency: 'EUR', exponent: 2, value: 1499},
-      			title: 'The Any Tool Shop',
-      			description: '2x your favorite tool',
-      			custom: {orderId: '<?=$orderId?>'},
-      			text: 'Any Tool Shop 1234',
-      		},
-      		(err, result) => {
-      			if (err) return console.log(err)
-      			location.href =
-      				'/complete-order.php?orderId=<?=$orderId?>&transactionId=' +
-      				result.transaction.id
-      		}
-      	)
+        const paylike = Paylike({key: '57d23ce1-b651-4b37-8bfb-d4077c3bbf38'})
+        paylike.pay(
+          {
+            test: true,
+            amount: {currency: 'EUR', exponent: 2, value: 1499},
+            title: 'The Any Tool Shop',
+            description: '2x your favorite tool',
+            custom: {orderId: '<?=$orderId?>'},
+            text: 'Any Tool Shop 1234',
+          },
+          (err, result) => {
+            if (err) return console.log(err)
+            location.href =
+              '/complete-order.php?orderId=<?=$orderId?>&transactionId=' +
+              result.transaction.id
+          }
+        )
       </script>
       ```
 
