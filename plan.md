@@ -13,6 +13,9 @@ payment plan. Read our section on
 [recurring payments](https://github.com/paylike/api-docs#recurring-payments) and
 plan accordingly.
 
+Future payments may later be created from your server using
+[our API by referencing the `transaction.id`](https://github.com/paylike/api-docs#using-a-previous-transaction).
+
 Each component represents an amount (`amount`) to be due at a future date either
 once (`scheduled`) or repeated.
 
