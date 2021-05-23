@@ -20,7 +20,7 @@
             title: 'The Any Tool Shop',
             description: '2x your favorite tool',
             custom: {orderId: '<?=$orderId?>'},
-            text: 'Any Tool Shop 1234',
+            text: 'Any Tool Shop*<?=$orderId?>',
           },
           (err, result) => {
             if (err) return console.log(err)
