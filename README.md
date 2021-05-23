@@ -24,7 +24,7 @@ Need help? Reach out on email: [hello@paylike.io](https://paylike.io/contact).
       title: 'The Any Tool Shop',
       description: '2x your favorite tool',
       custom: {orderId: 1234},
-      text: 'Any Tool Shop 1234',
+      text: 'Any Tool Shop*1234',
     },
     (err, result) => {
       if (err) return console.log(err)
