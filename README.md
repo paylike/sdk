@@ -58,7 +58,7 @@ paylike.pay(config, (err, r) => console.log(err, r))
   // and "unplanned")
   // example: {currency: 'EUR', exponent: 2, value: 1499} (EUR 14.99)
 
-  test: Boolean, // MUST be "true" if using a test key
+  test: Boolean, // MUST be set if using a test key
   title: String, // title text to show in popup
   description: String, // descriptive text to show in popup
 
@@ -166,6 +166,12 @@ paylike.popup(
 If you add a field with a name of "amount" it will allow users to dynamically
 choose the transaction amount.
 [See this example](https://sdk.paylike.io/examples/popup-donation.html).
+
+### Test scenarioes (`test`)
+
+The `test` parameter may be used to trigger specific payment flows and
+scenarios. The format is described in
+[the API reference documentation for the payments API](https://github.com/paylike/api-reference/blob/master/payments/index.md#test).
 
 ### Save (tokenize) a card for later use (subscriptions, installments, pay-as-you-go etc.)
 
