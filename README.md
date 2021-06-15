@@ -211,8 +211,8 @@ A monthly subscription of EUR 9.99.
 
 #### Unplanned (`unplanned`)
 
-Flag the types of unplanned payments the card will be used for. The supported
-types are:
+Flag the types (one or more) of unplanned payments the card could be used for in
+the future. The supported types are:
 
 - `customer` (initiated by the customer from your website/application)
 - `merchant` (initiated by the merchant or an off-site customer)
@@ -222,12 +222,26 @@ approval rates.
 
 ##### Example
 
+You wish to automatically charge the card for each ride in a roller coaster:
+
 ```js
 {
   // ...
   unplanned: {merchant: true},
 }
 ```
+
+You allow customers to save their card for faster checkout in the future:
+
+```js
+{
+  // ...
+  unplanned: {customer: true},
+}
+```
+
+The difference between the two scenarios is whether the customer is triggering
+the purchase from a device capable of authenticating the payment.
 
 ## Custom payment form
 
