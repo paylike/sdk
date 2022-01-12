@@ -140,7 +140,7 @@ There is no guarantee as to how the issuer of the customer's payment instrument
 ### Additional fields (`fields`)
 
 ```js
-paylike.popup(
+paylike.pay(
   {
     amount: 1000,
     currency: 'DKK',
