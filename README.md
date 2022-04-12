@@ -77,7 +77,7 @@ paylike.pay(config, (err, r) => console.log(err, r))
   fields: Array,
   // see "Additional fields" section below
 
-  plan: Object, // see "Plans" below
+  plan: Array, // see "Plans" below
   unplanned: {
     // see "Unplanned" below
     merchant: Boolean,
@@ -198,12 +198,14 @@ approval rates.
 
 ```js
 {
-  plan: {
-    amount: {currency: 'EUR', value: 999, exponent: 2},
-    repeat: {
-      interval: {unit: 'month'},
-    },
-  },
+  plan: [
+    {
+      amount: {currency: 'EUR', value: 999, exponent: 2},
+      repeat: {
+        interval: {unit: 'month'},
+      },
+    }
+  ],
 }
 ```
 
